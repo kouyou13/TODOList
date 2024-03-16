@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <>
       <Flex height='100vh' alignItems='center' justifyContent='center'>
-        <Flex direction='column' bg={'black'} padding={12} rounded={6} w={'100vw'} h={'100vh'} overflow={'scroll'}>
+        <Flex direction='column' bg={'black'} padding={12} w={'100vw'} h={'100vh'} overflow={'scroll'}>
           <Text color='white' fontSize='5xl' textAlign={'center'} padding={5}>TO DO List</Text>
           <Flex width={'70vw'} margin={'0 auto 2vh'}>
             <Button onClick={() => setOpenAddTaskModal(true)}>Add Task</Button>
@@ -49,6 +49,7 @@ export default function Home() {
             setDeleteSecectTodoId={setDeleteSelectTodoId}
             deleteSelectTodoName={deleteSelectTodoName}
             setDeleteSelectTodoName={setDeleteSelectTodoName}
+            searchKeyword={searchKeyword}
           />
         </Flex>
       </Flex>

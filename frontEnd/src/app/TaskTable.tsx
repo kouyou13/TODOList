@@ -15,6 +15,7 @@ type TableTableProps = {
   setDeleteSecectTodoId: React.Dispatch<React.SetStateAction<string | undefined>>
   deleteSelectTodoName: string | undefined
   setDeleteSelectTodoName: React.Dispatch<React.SetStateAction<string | undefined>>
+  searchKeyword: string
 }
 
 export const changeStateView = (state: 'still' | 'during' | 'done') => {
@@ -23,7 +24,15 @@ export const changeStateView = (state: 'still' | 'during' | 'done') => {
   else if(state === 'done') return 'Completed'
 }
 
-const _TableTable = ({todoList, selectedTodo, setSelectedTodo, deleteSelectTodoId, setDeleteSecectTodoId, deleteSelectTodoName, setDeleteSelectTodoName}: TableTableProps) => {
+const _TableTable = ({
+  todoList, selectedTodo,
+  setSelectedTodo,
+  deleteSelectTodoId,
+  setDeleteSecectTodoId,
+  deleteSelectTodoName,
+  setDeleteSelectTodoName,
+  searchKeyword,
+}: TableTableProps) => {
   return(
     <>
       <Table bg={'white'} variant={'none'} width={'60vw'} margin={'0 auto'} rounded={6}>
@@ -38,41 +47,44 @@ const _TableTable = ({todoList, selectedTodo, setSelectedTodo, deleteSelectTodoI
         {
           todoList.length > 0 ? (
             <Tbody>
-              {todoList.map((todo) => (
-                <Tr key={todo.id}>
-                  <Td>{changeStateView(todo.achievement)}</Td>
-                  <Td>{todo.name}</Td>
-                  <Td>{todo.limitDate}</Td>
-                  <Td>
-                    <Flex>
-                      <Button
-                        bg={'black'}
-                        color={'white'}
-                        onClick={() => setSelectedTodo({
-                          'id': todo.id,
-                          'achievement': todo.achievement,
-                          'name': todo.name,
-                          'limitDate': todo.limitDate,
-                        })}
-                      >
-                        Edit
-                      </Button>
-                      <Spacer />
-                      <Image
-                        src={dustbox}
-                        height={30}
-                        width={30}
-                        alt="ゴミ箱のアイコン"
-                        onClick={() => {
-                          setDeleteSecectTodoId(todo.id)
-                          setDeleteSelectTodoName(todo.name)
-                        }}
-                      />
-                      <Spacer />
-                    </Flex>
-                  </Td>
-                </Tr>
-              ))}
+              {todoList
+                .filter((todo) => searchKeyword === '' || todo.name.indexOf(searchKeyword) !== -1)
+                .map((todo) => (
+                  <Tr key={todo.id}>
+                    <Td>{changeStateView(todo.achievement)}</Td>
+                    <Td>{todo.name}</Td>
+                    <Td>{todo.limitDate}</Td>
+                    <Td>
+                      <Flex>
+                        <Button
+                          bg={'black'}
+                          color={'white'}
+                          onClick={() => setSelectedTodo({
+                            'id': todo.id,
+                            'achievement': todo.achievement,
+                            'name': todo.name,
+                            'limitDate': todo.limitDate,
+                          })}
+                        >
+                          Edit
+                        </Button>
+                        <Spacer />
+                        <Image
+                          src={dustbox}
+                          height={30}
+                          width={30}
+                          alt="ゴミ箱のアイコン"
+                          onClick={() => {
+                            setDeleteSecectTodoId(todo.id)
+                            setDeleteSelectTodoName(todo.name)
+                          }}
+                        />
+                        <Spacer />
+                      </Flex>
+                    </Td>
+                  </Tr>
+                ))
+              }
             </Tbody>
           ) : <></>
         }
