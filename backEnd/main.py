@@ -66,9 +66,9 @@ def addTask(item: AddItem):
     except:
       datas = []
     id = generateRandomString(10)
-    datas.append({
+    datas.insert(0, {
       'id': id,
-      'achievement': 'still',
+      'achievement': 'Not achieved',
       'name': item.name,
       'limitDate': item.limitDate,
     })

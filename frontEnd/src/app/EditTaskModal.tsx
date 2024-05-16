@@ -54,6 +54,7 @@ const _EditTaskModal = ({isOpen, onClose, selectedTodo}: EditTaskModalProps) => 
         'status': 'success',
         'duration': 3000,
         'isClosable': true,
+        'position': 'top',
       })
       onClose()
     } catch (error) {
@@ -75,18 +76,18 @@ const _EditTaskModal = ({isOpen, onClose, selectedTodo}: EditTaskModalProps) => 
                 <Td>State</Td>
                 <Td>
                   <Select onChange={(e) => setSelectedAchievement(e.target.value)} value={selectedAchievement}>
-                    <option value='still'>Not achieved</option>
-                    <option value='during'>In progress</option>
-                    <option value='done'>Completed</option>
+                    <option value='Not achieved'>Not achieved</option>
+                    <option value='In progress'>In progress</option>
+                    <option value='Completed'>Completed</option>
                   </Select>
                 </Td>
               </Tr>
               <Tr>
-                <Td>task name</Td>
+                <Td>Task Name</Td>
                 <Td><Input value={inputName} onChange={(e) => setInputName(e.target.value)} /></Td>
               </Tr>
               <Tr>
-                <Td>task limit</Td>
+                <Td>Task Limit</Td>
                 <Td><Input type="date" value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} /></Td>
               </Tr>
             </Tbody>

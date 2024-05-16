@@ -31,6 +31,7 @@ const _AddTaskModal = ({isOpen, onClose}: AddTaskModalProps) => {
         'status': 'success',
         'duration': 3000,
         'isClosable': true,
+        'position': 'top',
       })
       onClose()
     } catch (error) {
@@ -45,6 +46,7 @@ const _AddTaskModal = ({isOpen, onClose}: AddTaskModalProps) => {
         'status': 'error',
         'duration': 3000,
         'isClosable': true,
+        'position': 'top',
       })
     }
     else if(!selectedDate || selectedDate === ''){
@@ -53,6 +55,7 @@ const _AddTaskModal = ({isOpen, onClose}: AddTaskModalProps) => {
         'status': 'error',
         'duration': 3000,
         'isClosable': true,
+        'position': 'top',
       })
     }
     else{
@@ -70,11 +73,11 @@ const _AddTaskModal = ({isOpen, onClose}: AddTaskModalProps) => {
           <Table variant='none'>
             <Tbody>
               <Tr>
-                <Td>task name</Td>
+                <Td>Task Name</Td>
                 <Td><Input value={inputName} onChange={(e) => setInputName(e.target.value)} /></Td>
               </Tr>
               <Tr>
-                <Td>task limit</Td>
+                <Td>Task Limit</Td>
                 <Td><Input type="date" value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} /></Td>
               </Tr>
             </Tbody>

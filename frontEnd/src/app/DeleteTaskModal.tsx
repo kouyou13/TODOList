@@ -30,6 +30,7 @@ const _DeleteTaskModal = ({isOpen, onClose, deleteSelectTodoId, deleteSelectTodo
         'status': 'success',
         'duration': 3000,
         'isClosable': true,
+        'position': 'top',
       })
       onClose()
     } catch (error) {

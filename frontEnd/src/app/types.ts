@@ -1,6 +1,6 @@
 export type TodoListProps = {
   id: string
-  achievement: 'still' | 'during' | 'done'
+  achievement: 'Not achieved' | 'In progress' | 'Completed'
   name: string
   limitDate: string
 }

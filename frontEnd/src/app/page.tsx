@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import { Flex, Text, Button, Input } from '@chakra-ui/react'
+import { Flex, Text, Button, Input, HStack } from '@chakra-ui/react'
 
 import { TodoListProps } from './types'
 import TableTable from './TaskTable'
@@ -31,22 +31,30 @@ export default function Home() {
     fetchTodoList()
   }, [openAddTaskModal, selectedTodo, deleteSelectTodoId])
 
+  const doneFilterText = [
+    "Not achieved"
+  ]
+
   return (
     <>
       <Flex height='100vh' alignItems='center' justifyContent='center'>
         <Flex direction='column' bg={'black'} padding={12} w={'100vw'} h={'100vh'} overflow={'scroll'}>
           <Text color='white' fontSize='5xl' textAlign={'center'} padding={5}>TO DO List</Text>
-          <Flex width={'70vw'} margin={'0 auto 2vh'}>
+          <HStack w={'70vw'} margin={'2vh auto'}>
             <Button onClick={() => setOpenAddTaskModal(true)}>Add Task</Button>
             <Input bg={'white'} placeholder='search name' value={searchKeyword} onChange={(e) => setSearchKeyword(e.target.value)} />
-          </Flex>
+          </HStack>
+          <HStack w={'50vw'} margin={'1vh auto'}>
+            <Text color="white">Filter:</Text>
+
+          </HStack>
 
           <TableTable
             todoList={todoList}
             selectedTodo={selectedTodo}
             setSelectedTodo={setSelectedTodo}
             deleteSelectTodoId={deleteSelectTodoId}
-            setDeleteSecectTodoId={setDeleteSelectTodoId}
+            setDeleteSelectTodoId={setDeleteSelectTodoId}
             deleteSelectTodoName={deleteSelectTodoName}
             setDeleteSelectTodoName={setDeleteSelectTodoName}
             searchKeyword={searchKeyword}
