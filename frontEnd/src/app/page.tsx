@@ -1,74 +1,60 @@
-'use client'
-import React, { useState, useEffect } from 'react'
-import { Flex, Text, Button, Input, HStack } from '@chakra-ui/react'
+"use client"
+import React, { useState } from "react"
+import { Flex, Text, Input, HStack } from "@chakra-ui/react"
 
-import { TodoListProps } from './types'
-import TableTable from './TaskTable'
-import AddTaskModal from './AddTaskModal'
+import { TodoListTypes } from "./types"
+import TableTable from "./TaskTable"
+import AddTaskModalButton from "./AddTaskModalButton"
 
 export default function Home() {
-  const [todoList, setTodoList] = useState<TodoListProps[]>([])
-  const [searchKeyword, setSearchKeyword] = useState('')
-  const [openAddTaskModal, setOpenAddTaskModal] = useState(false)
-  const [selectedTodo, setSelectedTodo] = useState<TodoListProps | undefined>(undefined)
-  const [deleteSelectTodoId, setDeleteSelectTodoId] = useState<string | undefined>(undefined)
-  const [deleteSelectTodoName, setDeleteSelectTodoName] = useState<string | undefined>(undefined)
+  const [todoList, setTodoList] = useState<TodoListTypes[]>([])
+  const [keyword, setKeyword] = useState("")
 
-  useEffect(() => {
-    const fetchTodoList = async () => {
-      try {
-        const response = await fetch('http://127.0.0.1:8000/taskList')
-        if (!response.ok) {
-          throw new Error('Failed to fetch')
-        }
-        const data = await response.json()
-        setTodoList(data)
-      } catch (error) {
-        console.error('Error fetching todo list:', error)
+  const fetchTodoList = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/taskList")
+      if (!response.ok) {
+        throw new Error("Failed to fetch")
       }
+      const data = await response.json()
+      setTodoList(data)
+    } catch (error) {
+      console.error("Error fetching todo list:", error)
     }
-
-    fetchTodoList()
-  }, [openAddTaskModal, selectedTodo, deleteSelectTodoId])
-
-  const doneFilterText = [
-    "Not achieved"
-  ]
+  }
+  fetchTodoList()
 
   return (
     <>
-      <Flex height='100vh' alignItems='center' justifyContent='center'>
-        <Flex direction='column' bg={'black'} padding={12} w={'100vw'} h={'100vh'} overflow={'scroll'}>
-          <Text color='white' fontSize='5xl' textAlign={'center'} padding={5}>TO DO List</Text>
-          <HStack w={'70vw'} margin={'2vh auto'}>
-            <Button onClick={() => setOpenAddTaskModal(true)}>Add Task</Button>
-            <Input bg={'white'} placeholder='search name' value={searchKeyword} onChange={(e) => setSearchKeyword(e.target.value)} />
-          </HStack>
-          <HStack w={'50vw'} margin={'1vh auto'}>
-            <Text color="white">Filter:</Text>
-
+      <Flex height="100vh" alignItems="center" justifyContent="center">
+        <Flex
+          direction="column"
+          bg={"black"}
+          padding={12}
+          w={"100vw"}
+          h={"100vh"}
+          overflow={"scroll"}
+        >
+          <Text color="white" fontSize="5xl" textAlign={"center"} padding={5}>
+            TO DO List
+          </Text>
+          <HStack w={"70vw"} margin={"2vh auto"}>
+            <AddTaskModalButton refetch={fetchTodoList} />
+            <Input
+              bg={"white"}
+              placeholder="search name"
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
+            />
           </HStack>
 
           <TableTable
             todoList={todoList}
-            selectedTodo={selectedTodo}
-            setSelectedTodo={setSelectedTodo}
-            deleteSelectTodoId={deleteSelectTodoId}
-            setDeleteSelectTodoId={setDeleteSelectTodoId}
-            deleteSelectTodoName={deleteSelectTodoName}
-            setDeleteSelectTodoName={setDeleteSelectTodoName}
-            searchKeyword={searchKeyword}
+            searchKeyword={keyword}
+            refetch={fetchTodoList}
           />
         </Flex>
       </Flex>
-      {
-        openAddTaskModal ? (
-          <AddTaskModal
-            isOpen={openAddTaskModal}
-            onClose={() => setOpenAddTaskModal(false)}
-          />
-        ) : <></>
-      }
     </>
   )
 }
