@@ -18,6 +18,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react"
 import React, { useState } from "react"
+import { GetToday } from './utils/GetToday'
 
 type AddTaskModalProps = {
   isOpen: boolean
@@ -102,6 +103,7 @@ const _AddTaskModal = ({ isOpen, onClose }: AddTaskModalProps) => {
                 <Td>
                   <Input
                     type="date"
+                    min={GetToday()}
                     value={selectedDate}
                     onChange={(e) => setSelectedDate(e.target.value)}
                   />

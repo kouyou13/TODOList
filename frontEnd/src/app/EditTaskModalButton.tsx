@@ -20,6 +20,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react"
 import { TodoListTypes } from "./types"
+import { GetToday } from './utils/GetToday'
 
 type EditTaskModalProps = {
   isOpen: boolean
@@ -105,6 +106,7 @@ const _EditTaskModal = ({
                 <Td>
                   <Input
                     type="date"
+                    min={GetToday()}
                     value={selectedDate}
                     onChange={(e) => setSelectedDate(e.target.value)}
                   />
