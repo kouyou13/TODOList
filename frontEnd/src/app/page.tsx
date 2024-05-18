@@ -26,12 +26,14 @@ export default function Home() {
 
   return (
     <>
-      <Flex height="100vh" alignItems="center" justifyContent="center" w="100vw" bg="#1c1c1c">
-        <Flex
-          direction="column"
-          w="80vw"
-          h="80vh"
-        >
+      <Flex
+        height="100vh"
+        alignItems="center"
+        justifyContent="center"
+        w="100vw"
+        bg="#1c1c1c"
+      >
+        <Flex direction="column" w="80vw" h="80vh">
           <Text color="white" fontSize="5xl" textAlign={"center"} padding={5}>
             TODO List
           </Text>

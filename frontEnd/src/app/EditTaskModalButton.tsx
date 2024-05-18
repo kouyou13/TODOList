@@ -20,7 +20,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react"
 import { TodoListTypes } from "./types"
-import { GetToday } from './utils/GetToday'
+import { GetToday } from "./utils/GetToday"
 
 type EditTaskModalProps = {
   isOpen: boolean
