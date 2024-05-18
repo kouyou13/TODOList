@@ -114,7 +114,7 @@ const _AddTaskModal = ({ isOpen, onClose }: AddTaskModalProps) => {
           <HStack w={"100%"}>
             <Spacer />
             <Button onClick={onClose}>Cancel</Button>
-            <Button color="white" bg="black" onClick={() => addTaskHandler()}>
+            <Button color="white" bg="#1c1c1c" onClick={() => addTaskHandler()}>
               Save & Close
             </Button>
           </HStack>

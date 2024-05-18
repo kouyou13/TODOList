@@ -26,17 +26,14 @@ export default function Home() {
 
   return (
     <>
-      <Flex height="100vh" alignItems="center" justifyContent="center">
+      <Flex height="100vh" alignItems="center" justifyContent="center" w="100vw" bg="#1c1c1c">
         <Flex
           direction="column"
-          bg={"black"}
-          padding={12}
-          w={"100vw"}
-          h={"100vh"}
-          overflow={"scroll"}
+          w="80vw"
+          h="80vh"
         >
           <Text color="white" fontSize="5xl" textAlign={"center"} padding={5}>
-            TO DO List
+            TODO List
           </Text>
           <HStack w={"70vw"} margin={"2vh auto"}>
             <AddTaskModalButton refetch={fetchTodoList} />

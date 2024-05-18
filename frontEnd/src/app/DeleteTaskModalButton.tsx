@@ -73,7 +73,7 @@ const _DeleteTaskModal = ({
           <HStack w={"100%"}>
             <Spacer />
             <Button onClick={onClose}>Cancel</Button>
-            <Button color="white" bg="black" onClick={DeleteHandler}>
+            <Button color="white" bg="#1c1c1c" onClick={DeleteHandler}>
               Save changing
             </Button>
           </HStack>

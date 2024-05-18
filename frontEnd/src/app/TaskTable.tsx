@@ -20,6 +20,7 @@ const _TableTable = ({ todoList, searchKeyword, refetch }: TableTableProps) => {
         width={"60vw"}
         margin={"0 auto"}
         rounded={6}
+        overflowX="scroll"
       >
         <Thead>
           <Tr>

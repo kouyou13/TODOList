@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ja">
+    <html lang="ja" style={{backgroundColor: "#1c1c1c"}}>
       <body className={inter.className}>
         <Providers>{children}</Providers>
       </body>

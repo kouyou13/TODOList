@@ -117,7 +117,7 @@ const _EditTaskModal = ({
           <HStack w={"100%"}>
             <Spacer />
             <Button onClick={onClose}>Cancel</Button>
-            <Button color="white" bg="black" onClick={EditHandler}>
+            <Button color="white" bg="#1c1c1c" onClick={EditHandler}>
               Save changing
             </Button>
           </HStack>
@@ -140,7 +140,7 @@ const _EditTaskModalButton = ({
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
-      <Button bg={"black"} color={"white"} onClick={onOpen}>
+      <Button bg="#1c1c1c" color="white" onClick={onOpen}>
         Edit
       </Button>
       {isOpen && (
