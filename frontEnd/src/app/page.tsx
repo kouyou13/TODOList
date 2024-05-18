@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect } from "react"
-import { Flex, Text, Input, HStack } from "@chakra-ui/react"
+import { Text, Input, HStack, Box } from "@chakra-ui/react"
 
 import { TodoList } from "./types/types"
 import TableTable from "./TaskTable"
@@ -11,7 +11,7 @@ export default function Home() {
   const [keyword, setKeyword] = useState("")
 
   const fetchTodoList = async () => {
-    console.log('aa')
+    console.log("aa")
     try {
       const response = await fetch("http://127.0.0.1:8000/taskList")
       if (!response.ok) {
@@ -29,34 +29,29 @@ export default function Home() {
 
   return (
     <>
-      <Flex
-        height="100vh"
-        alignItems="center"
+      <Box
+        mt="5vh"
         justifyContent="center"
-        w="100vw"
         bg="#1c1c1c"
       >
-        <Flex direction="column" w="80vw" h="80vh">
-          <Text color="white" fontSize="5xl" textAlign={"center"} padding={5}>
-            TODO List
-          </Text>
-          <HStack w={"70vw"} margin={"2vh auto"}>
-            <AddTaskModalButton refetch={fetchTodoList} />
-            <Input
-              bg={"white"}
-              placeholder="search name"
-              value={keyword}
-              onChange={(e) => setKeyword(e.target.value)}
-            />
-          </HStack>
-
-          <TableTable
-            todoList={todoList}
-            searchKeyword={keyword}
-            refetch={fetchTodoList}
+        <Text color="white" fontSize="5xl" textAlign={"center"} padding={5}>
+          TODO List
+        </Text>
+        <HStack w={"70vw"} margin={"2vh auto"}>
+          <AddTaskModalButton refetch={fetchTodoList} />
+          <Input
+            bg={"white"}
+            placeholder="search name"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
           />
-        </Flex>
-      </Flex>
+        </HStack>
+        <TableTable
+          todoList={todoList}
+          searchKeyword={keyword}
+          refetch={fetchTodoList}
+        />
+      </Box>
     </>
   )
 }
