@@ -1,16 +1,17 @@
 "use client"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Flex, Text, Input, HStack } from "@chakra-ui/react"
 
-import { TodoListTypes } from "./types"
+import { TodoList } from "./types/types"
 import TableTable from "./TaskTable"
 import AddTaskModalButton from "./AddTaskModalButton"
 
 export default function Home() {
-  const [todoList, setTodoList] = useState<TodoListTypes[]>([])
+  const [todoList, setTodoList] = useState<TodoList[]>([])
   const [keyword, setKeyword] = useState("")
 
   const fetchTodoList = async () => {
+    console.log('aa')
     try {
       const response = await fetch("http://127.0.0.1:8000/taskList")
       if (!response.ok) {
@@ -22,7 +23,9 @@ export default function Home() {
       console.error("Error fetching todo list:", error)
     }
   }
-  fetchTodoList()
+  useEffect(() => {
+    fetchTodoList()
+  }, [])
 
   return (
     <>

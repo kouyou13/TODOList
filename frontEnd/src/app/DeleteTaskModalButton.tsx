@@ -14,14 +14,14 @@ import {
   IconButton,
   useDisclosure,
 } from "@chakra-ui/react"
-import { TodoListTypes } from "./types"
+import { TodoList } from "./types/types"
 import React from "react"
 import { GrDropbox } from "react-icons/gr"
 
 type DeleteTaskModalProps = {
   isOpen: boolean
   onClose: () => void
-  selectedTodo: TodoListTypes
+  selectedTodo: TodoList
 }
 
 const _DeleteTaskModal = ({
@@ -85,7 +85,7 @@ const _DeleteTaskModal = ({
 const DeleteTaskModal = React.memo(_DeleteTaskModal)
 
 type DeleteTaskModalButtonProps = {
-  selectedTodo: TodoListTypes
+  selectedTodo: TodoList
   refetch: () => void
 }
 

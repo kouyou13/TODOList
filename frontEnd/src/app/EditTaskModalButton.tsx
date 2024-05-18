@@ -19,13 +19,13 @@ import {
   Select,
   useDisclosure,
 } from "@chakra-ui/react"
-import { TodoListTypes } from "./types"
-import { GetToday } from "./utils/GetToday"
+import { TodoList } from "./types/types"
+import { GetToday } from "./utils/getToday"
 
 type EditTaskModalProps = {
   isOpen: boolean
   onClose: () => void
-  selectedTodo: TodoListTypes
+  selectedTodo: TodoList
 }
 
 const _EditTaskModal = ({
@@ -131,7 +131,7 @@ const _EditTaskModal = ({
 const EditTaskModal = React.memo(_EditTaskModal)
 
 type EditTaskModalButtonProps = {
-  selectedTodo: TodoListTypes
+  selectedTodo: TodoList
   refetch: () => void
 }
 

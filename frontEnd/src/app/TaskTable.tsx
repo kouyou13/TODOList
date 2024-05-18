@@ -1,12 +1,12 @@
 import React from "react"
 import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react"
 
-import { TodoListTypes } from "./types"
+import { TodoList } from "./types/types"
 import EditTaskModalButton from "./EditTaskModalButton"
 import DeleteTaskModalButton from "./DeleteTaskModalButton"
 
 type TableTableProps = {
-  todoList: TodoListTypes[]
+  todoList: TodoList[]
   searchKeyword: string
   refetch: () => void
 }
