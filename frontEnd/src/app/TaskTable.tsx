@@ -23,19 +23,16 @@ const _TableTable = ({
   checkedCompleted,
 }: TableTableProps) => {
   const filteredTodoList = (todoList: TodoList[]) => {
-    if (!checkedNotAchieved && !checkedInProgress && !checkedCompleted) {
+    if(!checkedNotAchieved && !checkedInProgress && !checkedCompleted) {
       return todoList
     }
-    const notAchievedList = checkedNotAchieved
-      ? todoList.filter((todo) => todo.achievement === "Not achieved")
-      : []
-    const inProgressList = checkedInProgress
-      ? todoList.filter((todo) => todo.achievement === "In progress")
-      : []
-    const completedList = checkedCompleted
-      ? todoList.filter((todo) => todo.achievement === "Completed")
-      : []
-    return [...notAchievedList, ...inProgressList, ...completedList]
+    return (
+      todoList.filter((todo) =>
+        (checkedNotAchieved && todo.achievement === "Not achieved") ||
+        (checkedInProgress && todo.achievement === "In progress") ||
+        (checkedCompleted && todo.achievement === "Completed")
+      )
+    )
   }
 
   return (
