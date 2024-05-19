@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect } from "react"
-import { Text, Input, HStack, Box } from "@chakra-ui/react"
+import { Text, Input, HStack, Box, Checkbox, Flex } from "@chakra-ui/react"
 
 import { TodoList } from "./types/types"
 import TableTable from "./TaskTable"
@@ -9,9 +9,11 @@ import AddTaskModalButton from "./AddTaskModalButton"
 export default function Home() {
   const [todoList, setTodoList] = useState<TodoList[]>([])
   const [keyword, setKeyword] = useState("")
+  const [checkedNotAchieved, setCheckedNotAchieved] = useState(false)
+  const [checkedInProgress, setCheckedInProgress] = useState(false)
+  const [checkedCompleted, setCheckedInCompleted] = useState(false)
 
   const fetchTodoList = async () => {
-    console.log("aa")
     try {
       const response = await fetch("http://127.0.0.1:8000/taskList")
       if (!response.ok) {
@@ -29,15 +31,11 @@ export default function Home() {
 
   return (
     <>
-      <Box
-        mt="5vh"
-        justifyContent="center"
-        bg="#1c1c1c"
-      >
+      <Box mt="5vh" justifyContent="center" bg="#1c1c1c">
         <Text color="white" fontSize="5xl" textAlign={"center"} padding={5}>
           TODO List
         </Text>
-        <HStack w={"70vw"} margin={"2vh auto"}>
+        <HStack w={"70vw"} margin={"0 auto"}>
           <AddTaskModalButton refetch={fetchTodoList} />
           <Input
             bg={"white"}
@@ -46,10 +44,36 @@ export default function Home() {
             onChange={(e) => setKeyword(e.target.value)}
           />
         </HStack>
+        <Flex alignItems="center" justifyContent="center" gap={20}>
+          <Checkbox
+            color="white"
+            p={1}
+            onChange={(e) => setCheckedNotAchieved(e.target.checked)}
+          >
+            Not achieved
+          </Checkbox>
+          <Checkbox
+            color="white"
+            p={1}
+            onChange={(e) => setCheckedInProgress(e.target.checked)}
+          >
+            In progress
+          </Checkbox>
+          <Checkbox
+            color="white"
+            p={1}
+            onChange={(e) => setCheckedInCompleted(e.target.checked)}
+          >
+            Completed
+          </Checkbox>
+        </Flex>
         <TableTable
           todoList={todoList}
           searchKeyword={keyword}
           refetch={fetchTodoList}
+          checkedNotAchieved={checkedNotAchieved}
+          checkedInProgress={checkedInProgress}
+          checkedCompleted={checkedCompleted}
         />
       </Box>
     </>

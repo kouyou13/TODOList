@@ -9,9 +9,35 @@ type TableTableProps = {
   todoList: TodoList[]
   searchKeyword: string
   refetch: () => void
+  checkedNotAchieved: boolean
+  checkedInProgress: boolean
+  checkedCompleted: boolean
 }
 
-const _TableTable = ({ todoList, searchKeyword, refetch }: TableTableProps) => {
+const _TableTable = ({
+  todoList,
+  searchKeyword,
+  refetch,
+  checkedNotAchieved,
+  checkedInProgress,
+  checkedCompleted,
+}: TableTableProps) => {
+  const filteredTodoList = (todoList: TodoList[]) => {
+    if (!checkedNotAchieved && !checkedInProgress && !checkedCompleted) {
+      return todoList
+    }
+    const notAchievedList = checkedNotAchieved
+      ? todoList.filter((todo) => todo.achievement === "Not achieved")
+      : []
+    const inProgressList = checkedInProgress
+      ? todoList.filter((todo) => todo.achievement === "In progress")
+      : []
+    const completedList = checkedCompleted
+      ? todoList.filter((todo) => todo.achievement === "Completed")
+      : []
+    return [...notAchievedList, ...inProgressList, ...completedList]
+  }
+
   return (
     <>
       <Table
@@ -31,9 +57,9 @@ const _TableTable = ({ todoList, searchKeyword, refetch }: TableTableProps) => {
             <Th>Drop</Th>
           </Tr>
         </Thead>
-        {todoList.length > 0 ? (
+        {todoList.length > 0 && (
           <Tbody>
-            {todoList
+            {filteredTodoList(todoList)
               .filter(
                 (todo) =>
                   searchKeyword === "" ||
@@ -59,8 +85,6 @@ const _TableTable = ({ todoList, searchKeyword, refetch }: TableTableProps) => {
                 </Tr>
               ))}
           </Tbody>
-        ) : (
-          <></>
         )}
       </Table>
     </>
