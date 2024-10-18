@@ -81,7 +81,7 @@ def addTask(item: AddItem):
 
 @app.post('/updateTask')
 def updateTask(item: UpdateItem):
-  # try:
+  try:
     with open(tasksJsonPath, 'r') as file:
       datas = json.load(file)
     for data in datas:
@@ -94,8 +94,8 @@ def updateTask(item: UpdateItem):
       json.dump(datas, file)
     return {'message': 'Task update successfully'}
 
-  # except:
-  #   raise HTTPException(status_code=504, detail='Item not found')
+  except:
+    raise HTTPException(status_code=504, detail='Item not found')
 
 @app.post('/deleteTask')
 def deleteTask(item: DeleteItem):
