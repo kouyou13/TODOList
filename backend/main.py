@@ -37,7 +37,7 @@ class UpdateItem(BaseModel):
 class DeleteItem(BaseModel):
   id: str
 
-def generateRandomString(length):
+def generateRandomString(length: int):
   # 英字と数字を含む文字列を生成
   characters = string.ascii_letters + string.digits
   # ランダムな文字列を生成
