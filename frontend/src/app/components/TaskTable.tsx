@@ -1,7 +1,7 @@
 import React from "react"
 import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react"
 
-import { TodoList } from "./types/types"
+import { TodoList } from "../types/types"
 import EditTaskModalButton from "./EditTaskModalButton"
 import DeleteTaskModalButton from "./DeleteTaskModalButton"
 
@@ -23,15 +23,14 @@ const _TableTable = ({
   checkedCompleted,
 }: TableTableProps) => {
   const filteredTodoList = (todoList: TodoList[]) => {
-    if(!checkedNotAchieved && !checkedInProgress && !checkedCompleted) {
+    if (!checkedNotAchieved && !checkedInProgress && !checkedCompleted) {
       return todoList
     }
-    return (
-      todoList.filter((todo) =>
+    return todoList.filter(
+      (todo) =>
         (checkedNotAchieved && todo.achievement === "Not achieved") ||
         (checkedInProgress && todo.achievement === "In progress") ||
-        (checkedCompleted && todo.achievement === "Completed")
-      )
+        (checkedCompleted && todo.achievement === "Completed"),
     )
   }
 

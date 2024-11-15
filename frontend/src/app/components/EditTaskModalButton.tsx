@@ -1,4 +1,5 @@
 "use client"
+import React, { useState } from "react"
 import {
   Modal,
   ModalOverlay,
@@ -16,29 +17,40 @@ import {
   HStack,
   Button,
   useToast,
+  Select,
   useDisclosure,
 } from "@chakra-ui/react"
-import React, { useState } from "react"
-import { GetToday } from "./utils/getToday"
+import { TodoList } from "../types/types"
+import { GetToday } from "../utils/getToday"
 
-type AddTaskModalProps = {
+type EditTaskModalProps = {
   isOpen: boolean
   onClose: () => void
+  selectedTodo: TodoList
 }
 
-const _AddTaskModal = ({ isOpen, onClose }: AddTaskModalProps) => {
+const _EditTaskModal = ({
+  isOpen,
+  onClose,
+  selectedTodo,
+}: EditTaskModalProps) => {
   const toast = useToast()
-  const [inputName, setInputName] = useState("")
-  const [selectedDate, setSelectedDate] = useState("")
+  const [selectedAchievement, setSelectedAchievement] = useState<string>(
+    selectedTodo.achievement,
+  )
+  const [inputName, setInputName] = useState(selectedTodo.name)
+  const [selectedDate, setSelectedDate] = useState(selectedTodo.limitDate)
 
-  const addTask = async () => {
+  const EditHandler = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/addTask", {
+      const response = await fetch("http://127.0.0.1:8000/updateTask", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          id: selectedTodo.id,
+          achievement: selectedAchievement,
           name: inputName,
           limitDate: selectedDate,
         }),
@@ -47,7 +59,7 @@ const _AddTaskModal = ({ isOpen, onClose }: AddTaskModalProps) => {
         throw new Error("Failed to update todo list")
       }
       toast({
-        title: "succeeded to register",
+        title: "succeeded to update",
         status: "success",
         duration: 3000,
         isClosable: true,
@@ -59,37 +71,28 @@ const _AddTaskModal = ({ isOpen, onClose }: AddTaskModalProps) => {
     }
   }
 
-  const addTaskHandler = async () => {
-    if (!inputName || inputName === "") {
-      toast({
-        title: "name is not input",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-        position: "top",
-      })
-    } else if (!selectedDate || selectedDate === "") {
-      toast({
-        title: "task limit is not selected",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-        position: "top",
-      })
-    } else {
-      addTask()
-    }
-  }
-
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="3xl">
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader textAlign={"center"}>Add Task</ModalHeader>
+        <ModalHeader textAlign={"center"}>Edit Task</ModalHeader>
         <ModalCloseButton />
         <Flex direction="column" rounded={6}>
           <Table variant="none">
             <Tbody>
+              <Tr>
+                <Td>State</Td>
+                <Td>
+                  <Select
+                    onChange={(e) => setSelectedAchievement(e.target.value)}
+                    value={selectedAchievement}
+                  >
+                    <option value="Not achieved">Not achieved</option>
+                    <option value="In progress">In progress</option>
+                    <option value="Completed">Completed</option>
+                  </Select>
+                </Td>
+              </Tr>
               <Tr>
                 <Td>Task Name</Td>
                 <Td>
@@ -117,8 +120,8 @@ const _AddTaskModal = ({ isOpen, onClose }: AddTaskModalProps) => {
           <HStack w={"100%"}>
             <Spacer />
             <Button onClick={onClose}>Cancel</Button>
-            <Button color="white" bg="#1c1c1c" onClick={() => addTaskHandler()}>
-              Save & Close
+            <Button color="white" bg="#1c1c1c" onClick={EditHandler}>
+              Save changing
             </Button>
           </HStack>
         </ModalFooter>
@@ -126,28 +129,35 @@ const _AddTaskModal = ({ isOpen, onClose }: AddTaskModalProps) => {
     </Modal>
   )
 }
-const AddTaskModal = React.memo(_AddTaskModal)
+const EditTaskModal = React.memo(_EditTaskModal)
 
-type AddTaskModalButtonProps = {
+type EditTaskModalButtonProps = {
+  selectedTodo: TodoList
   refetch: () => void
 }
 
-const _AddTaskModalButton = ({ refetch }: AddTaskModalButtonProps) => {
+const _EditTaskModalButton = ({
+  selectedTodo,
+  refetch,
+}: EditTaskModalButtonProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
-      <Button onClick={onOpen}>Add Task</Button>
+      <Button bg="#1c1c1c" color="white" onClick={onOpen}>
+        Edit
+      </Button>
       {isOpen && (
-        <AddTaskModal
+        <EditTaskModal
           isOpen={isOpen}
           onClose={() => {
             onClose()
             refetch()
           }}
+          selectedTodo={selectedTodo}
         />
       )}
     </>
   )
 }
-const AddTaskModalButton = React.memo(_AddTaskModalButton)
-export default _AddTaskModalButton
+const EditTaskModalButton = React.memo(_EditTaskModalButton)
+export default EditTaskModalButton
