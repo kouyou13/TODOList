@@ -17,6 +17,7 @@
     "@emotion/styled": "^11.11.0",
     "framer-motion": "^11.0.13",
     "fs": "^0.0.1-security",
+    "husky": "^9.1.6",
     "next": "14.1.3",
     "path": "^0.12.7",
     "react": "^18",
@@ -38,5 +39,10 @@
   },
   "browser": {
     "fs": false
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run fmt"
+    }
   }
 }
