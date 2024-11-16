@@ -15,7 +15,9 @@ import {
   ModalFooter,
   HStack,
   Button,
-  useToast, Select, useDisclosure,
+  useToast,
+  Select,
+  useDisclosure,
 } from "@chakra-ui/react"
 import { TodoList } from "../types/types"
 import { GetToday } from "../utils/getToday"
