@@ -1,10 +1,10 @@
-import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react"
-import React from "react"
+import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react'
+import React from 'react'
 
-import DeleteTaskModalButton from "./DeleteTaskModalButton"
-import EditTaskModalButton from "./EditTaskModalButton"
-import { TodoList } from "../types/types"
-import expiredDecision from "../utils/ExpiredDecision"
+import DeleteTaskModalButton from './DeleteTaskModalButton'
+import EditTaskModalButton from './EditTaskModalButton'
+import { TodoList } from '../types/types'
+import expiredDecision from '../utils/ExpiredDecision'
 
 type TableTableProps = {
   todoList: TodoList[]
@@ -29,22 +29,15 @@ const _TableTable = ({
     }
     return todoList.filter(
       (todo) =>
-        (checkedNotAchieved && todo.achievement === "Not achieved") ||
-        (checkedInProgress && todo.achievement === "In progress") ||
-        (checkedCompleted && todo.achievement === "Completed"),
+        (checkedNotAchieved && todo.achievement === 'Not achieved') ||
+        (checkedInProgress && todo.achievement === 'In progress') ||
+        (checkedCompleted && todo.achievement === 'Completed'),
     )
   }
 
   return (
     <>
-      <Table
-        bg={"white"}
-        variant={"none"}
-        width={"60vw"}
-        margin={"0 auto"}
-        rounded={6}
-        overflowX="scroll"
-      >
+      <Table bg="white" variant="none" width="60vw" margin="0 auto" rounded={6} overflowX="scroll">
         <Thead>
           <Tr>
             <Th>State</Th>
@@ -57,27 +50,25 @@ const _TableTable = ({
         {todoList.length > 0 && (
           <Tbody>
             {filteredTodoList(todoList)
-              .filter(
-                (todo) =>
-                  searchKeyword === "" ||
-                  todo.name.indexOf(searchKeyword) !== -1,
-              )
+              .filter((todo) => searchKeyword === '' || todo.name.indexOf(searchKeyword) !== -1)
               .map((todo) => (
                 <Tr key={todo.id}>
                   <Td>{todo.achievement}</Td>
                   <Td>{todo.name}</Td>
-                  <Td color={expiredDecision(todo.limitDate) && todo.achievement !== "Completed" ? "red" : ""}>{todo.limitDate}</Td>
-                  <Td>
-                    <EditTaskModalButton
-                      selectedTodo={todo}
-                      refetch={refetch}
-                    />
+                  <Td
+                    color={
+                      expiredDecision(todo.limitDate) && todo.achievement !== 'Completed'
+                        ? 'red'
+                        : ''
+                    }
+                  >
+                    {todo.limitDate}
                   </Td>
                   <Td>
-                    <DeleteTaskModalButton
-                      selectedTodo={todo}
-                      refetch={refetch}
-                    />
+                    <EditTaskModalButton selectedTodo={todo} refetch={refetch} />
+                  </Td>
+                  <Td>
+                    <DeleteTaskModalButton selectedTodo={todo} refetch={refetch} />
                   </Td>
                 </Tr>
               ))}

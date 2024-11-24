@@ -1,4 +1,4 @@
-export type AchievementOperator = "Not achieved" | "In progress" | "Completed"
+export type AchievementOperator = 'Not achieved' | 'In progress' | 'Completed'
 
 export type TodoList = {
   readonly id: string

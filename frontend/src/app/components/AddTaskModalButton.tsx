@@ -16,10 +16,10 @@ import {
   Button,
   useToast,
   useDisclosure,
-} from "@chakra-ui/react"
-import React, { useState } from "react"
+} from '@chakra-ui/react'
+import React, { useState } from 'react'
 
-import { GetNow } from "../utils/GetNow"
+import { GetNow } from '../utils/GetNow'
 
 type AddTaskModalProps = {
   isOpen: boolean
@@ -30,15 +30,15 @@ const _AddTaskModal = ({ isOpen, onClose }: AddTaskModalProps) => {
   const toast = useToast()
   const now = GetNow()
   const minDate = `${now.year}-${now.month}-${now.date}`
-  const [inputName, setInputName] = useState("")
+  const [inputName, setInputName] = useState('')
   const [selectedDate, setSelectedDate] = useState(minDate)
 
   const addTask = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/addTask", {
-        method: "POST",
+      const response = await fetch('http://127.0.0.1:8000/addTask', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           name: inputName,
@@ -46,37 +46,37 @@ const _AddTaskModal = ({ isOpen, onClose }: AddTaskModalProps) => {
         }),
       })
       if (!response.ok) {
-        throw new Error("Failed to update todo list")
+        throw new Error('Failed to update todo list')
       }
       toast({
-        title: "succeeded to register",
-        status: "success",
+        title: 'succeeded to register',
+        status: 'success',
         duration: 3000,
         isClosable: true,
-        position: "top",
+        position: 'top',
       })
       onClose()
     } catch (error) {
-      console.error("Error updating todo list:", error)
+      console.error('Error updating todo list:', error)
     }
   }
 
   const addTaskHandler = async () => {
-    if (!inputName || inputName === "") {
+    if (!inputName || inputName === '') {
       toast({
-        title: "name is not input",
-        status: "error",
+        title: 'name is not input',
+        status: 'error',
         duration: 3000,
         isClosable: true,
-        position: "top",
+        position: 'top',
       })
-    } else if (!selectedDate || selectedDate === "") {
+    } else if (!selectedDate || selectedDate === '') {
       toast({
-        title: "task limit is not selected",
-        status: "error",
+        title: 'task limit is not selected',
+        status: 'error',
         duration: 3000,
         isClosable: true,
-        position: "top",
+        position: 'top',
       })
     } else {
       addTask()
@@ -87,7 +87,7 @@ const _AddTaskModal = ({ isOpen, onClose }: AddTaskModalProps) => {
     <Modal isOpen={isOpen} onClose={onClose} size="3xl">
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader textAlign={"center"}>Add Task</ModalHeader>
+        <ModalHeader textAlign="center">Add Task</ModalHeader>
         <ModalCloseButton />
         <Flex direction="column" rounded={6}>
           <Table variant="none">
@@ -95,10 +95,7 @@ const _AddTaskModal = ({ isOpen, onClose }: AddTaskModalProps) => {
               <Tr>
                 <Td>Task Name</Td>
                 <Td>
-                  <Input
-                    value={inputName}
-                    onChange={(e) => setInputName(e.target.value)}
-                  />
+                  <Input value={inputName} onChange={(e) => setInputName(e.target.value)} />
                 </Td>
               </Tr>
               <Tr>
@@ -116,7 +113,7 @@ const _AddTaskModal = ({ isOpen, onClose }: AddTaskModalProps) => {
           </Table>
         </Flex>
         <ModalFooter>
-          <HStack w={"100%"}>
+          <HStack w="100%">
             <Spacer />
             <Button onClick={onClose}>Cancel</Button>
             <Button color="white" bg="#1c1c1c" onClick={() => addTaskHandler()}>

@@ -1,5 +1,5 @@
-"use client"
-import Home from "./components/Home"
+'use client'
+import Home from './components/Home'
 
 const Pages = () => {
   return (

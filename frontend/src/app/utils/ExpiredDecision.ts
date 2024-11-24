@@ -1,4 +1,4 @@
-import dayJs from "dayjs"
+import dayJs from 'dayjs'
 
 /**
  * @description
@@ -8,7 +8,7 @@ import dayJs from "dayjs"
  */
 const expiredDecision = (limitDate: string) => {
   const targetDate = dayJs(limitDate)
-  if(targetDate.isBefore(dayJs())) {
+  if (targetDate.isBefore(dayJs())) {
     return true
   } else {
     return false

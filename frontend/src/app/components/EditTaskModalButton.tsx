@@ -17,11 +17,11 @@ import {
   useToast,
   Select,
   useDisclosure,
-} from "@chakra-ui/react"
-import React, { useState } from "react"
+} from '@chakra-ui/react'
+import React, { useState } from 'react'
 
-import { TodoList } from "../types/types"
-import { GetNow } from "../utils/GetNow"
+import { TodoList } from '../types/types'
+import { GetNow } from '../utils/GetNow'
 
 type EditTaskModalProps = {
   isOpen: boolean
@@ -29,15 +29,9 @@ type EditTaskModalProps = {
   selectedTodo: TodoList
 }
 
-const _EditTaskModal = ({
-  isOpen,
-  onClose,
-  selectedTodo,
-}: EditTaskModalProps) => {
+const _EditTaskModal = ({ isOpen, onClose, selectedTodo }: EditTaskModalProps) => {
   const toast = useToast()
-  const [selectedAchievement, setSelectedAchievement] = useState<string>(
-    selectedTodo.achievement,
-  )
+  const [selectedAchievement, setSelectedAchievement] = useState<string>(selectedTodo.achievement)
   const [inputName, setInputName] = useState(selectedTodo.name)
   const [selectedDate, setSelectedDate] = useState(selectedTodo.limitDate)
   const now = GetNow()
@@ -45,10 +39,10 @@ const _EditTaskModal = ({
 
   const EditHandler = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/updateTask", {
-        method: "POST",
+      const response = await fetch('http://127.0.0.1:8000/updateTask', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           id: selectedTodo.id,
@@ -58,18 +52,18 @@ const _EditTaskModal = ({
         }),
       })
       if (!response.ok) {
-        throw new Error("Failed to update todo list")
+        throw new Error('Failed to update todo list')
       }
       toast({
-        title: "succeeded to update",
-        status: "success",
+        title: 'succeeded to update',
+        status: 'success',
         duration: 3000,
         isClosable: true,
-        position: "top",
+        position: 'top',
       })
       onClose()
     } catch (error) {
-      console.error("Error updating todo list:", error)
+      console.error('Error updating todo list:', error)
     }
   }
 
@@ -77,7 +71,7 @@ const _EditTaskModal = ({
     <Modal isOpen={isOpen} onClose={onClose} size="3xl">
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader textAlign={"center"}>Edit Task</ModalHeader>
+        <ModalHeader textAlign="center">Edit Task</ModalHeader>
         <ModalCloseButton />
         <Flex direction="column" rounded={6}>
           <Table variant="none">
@@ -98,10 +92,7 @@ const _EditTaskModal = ({
               <Tr>
                 <Td>Task Name</Td>
                 <Td>
-                  <Input
-                    value={inputName}
-                    onChange={(e) => setInputName(e.target.value)}
-                  />
+                  <Input value={inputName} onChange={(e) => setInputName(e.target.value)} />
                 </Td>
               </Tr>
               <Tr>
@@ -119,7 +110,7 @@ const _EditTaskModal = ({
           </Table>
         </Flex>
         <ModalFooter>
-          <HStack w={"100%"}>
+          <HStack w="100%">
             <Spacer />
             <Button onClick={onClose}>Cancel</Button>
             <Button color="white" bg="#1c1c1c" onClick={EditHandler}>
@@ -138,10 +129,7 @@ type EditTaskModalButtonProps = {
   refetch: () => void
 }
 
-const _EditTaskModalButton = ({
-  selectedTodo,
-  refetch,
-}: EditTaskModalButtonProps) => {
+const _EditTaskModalButton = ({ selectedTodo, refetch }: EditTaskModalButtonProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
