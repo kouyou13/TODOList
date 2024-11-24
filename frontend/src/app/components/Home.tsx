@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react"
 import { Text, Input, HStack, Box, Checkbox, Flex } from "@chakra-ui/react"
+import React, { useState, useEffect } from "react"
 
-import { TodoList } from "../types/types"
-import TableTable from "./TaskTable"
 import AddTaskModalButton from "./AddTaskModalButton"
+import TableTable from "./TaskTable"
+import { TodoList } from "../types/types"
 
 const _Home = () => {
   const [todoList, setTodoList] = useState<TodoList[]>([])

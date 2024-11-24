@@ -1,9 +1,10 @@
-import React from "react"
 import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react"
+import React from "react"
 
-import { TodoList } from "../types/types"
-import EditTaskModalButton from "./EditTaskModalButton"
 import DeleteTaskModalButton from "./DeleteTaskModalButton"
+import EditTaskModalButton from "./EditTaskModalButton"
+import { TodoList } from "../types/types"
+import expiredDecision from "../utils/ExpiredDecision"
 
 type TableTableProps = {
   todoList: TodoList[]
@@ -65,7 +66,7 @@ const _TableTable = ({
                 <Tr key={todo.id}>
                   <Td>{todo.achievement}</Td>
                   <Td>{todo.name}</Td>
-                  <Td>{todo.limitDate}</Td>
+                  <Td color={expiredDecision(todo.limitDate) && todo.achievement !== "Completed" ? "red" : ""}>{todo.limitDate}</Td>
                   <Td>
                     <EditTaskModalButton
                       selectedTodo={todo}

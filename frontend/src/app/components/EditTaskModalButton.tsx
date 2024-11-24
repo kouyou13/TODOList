@@ -1,4 +1,3 @@
-import React, { useState } from "react"
 import {
   Modal,
   ModalOverlay,
@@ -19,6 +18,8 @@ import {
   Select,
   useDisclosure,
 } from "@chakra-ui/react"
+import React, { useState } from "react"
+
 import { TodoList } from "../types/types"
 import { GetNow } from "../utils/GetNow"
 

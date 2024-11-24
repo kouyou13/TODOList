@@ -14,9 +14,10 @@ import {
   IconButton,
   useDisclosure,
 } from "@chakra-ui/react"
-import { TodoList } from "../types/types"
 import React from "react"
 import { GrDropbox } from "react-icons/gr"
+
+import { TodoList } from "../types/types"
 
 type DeleteTaskModalProps = {
   isOpen: boolean
