@@ -45,14 +45,21 @@ const _DeleteTaskModal = ({ isOpen, onClose, selectedTodo }: DeleteTaskModalProp
       toast({
         title: 'succeeded to delete',
         status: 'success',
-        duration: 3000,
+        duration: 5000,
         isClosable: true,
         position: 'top',
       })
-      onClose()
     } catch (error) {
       console.error('Error delete todo list:', error)
+      toast({
+        title: 'failed to delete',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'top',
+      })
     }
+    onClose()
   }
 
   return (

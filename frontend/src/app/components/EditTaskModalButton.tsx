@@ -57,14 +57,14 @@ const _EditTaskModal = ({ isOpen, onClose, selectedTodo }: EditTaskModalProps) =
       toast({
         title: 'succeeded to update',
         status: 'success',
-        duration: 3000,
+        duration: 5000,
         isClosable: true,
         position: 'top',
       })
-      onClose()
     } catch (error) {
       console.error('Error updating todo list:', error)
     }
+    onClose()
   }
 
   return (

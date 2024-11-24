@@ -51,13 +51,20 @@ const _AddTaskModal = ({ isOpen, onClose }: AddTaskModalProps) => {
       toast({
         title: 'succeeded to register',
         status: 'success',
-        duration: 3000,
+        duration: 5000,
         isClosable: true,
         position: 'top',
       })
       onClose()
     } catch (error) {
       console.error('Error updating todo list:', error)
+      toast({
+        title: 'succeeded to register',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+        position: 'top',
+      })
     }
   }
 
@@ -66,7 +73,7 @@ const _AddTaskModal = ({ isOpen, onClose }: AddTaskModalProps) => {
       toast({
         title: 'name is not input',
         status: 'error',
-        duration: 3000,
+        duration: 5000,
         isClosable: true,
         position: 'top',
       })
@@ -74,7 +81,7 @@ const _AddTaskModal = ({ isOpen, onClose }: AddTaskModalProps) => {
       toast({
         title: 'task limit is not selected',
         status: 'error',
-        duration: 3000,
+        duration: 5000,
         isClosable: true,
         position: 'top',
       })
