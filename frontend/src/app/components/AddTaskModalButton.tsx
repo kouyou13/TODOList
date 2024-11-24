@@ -18,7 +18,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react"
 import React, { useState } from "react"
-import { GetToday } from "../utils/getToday"
+import { GetNow } from "../utils/GetNow"
 
 type AddTaskModalProps = {
   isOpen: boolean
@@ -27,8 +27,10 @@ type AddTaskModalProps = {
 
 const _AddTaskModal = ({ isOpen, onClose }: AddTaskModalProps) => {
   const toast = useToast()
+  const now = GetNow()
+  const minDate = `${now.year}-${now.month}-${now.date}`
   const [inputName, setInputName] = useState("")
-  const [selectedDate, setSelectedDate] = useState("")
+  const [selectedDate, setSelectedDate] = useState(minDate)
 
   const addTask = async () => {
     try {
@@ -103,7 +105,7 @@ const _AddTaskModal = ({ isOpen, onClose }: AddTaskModalProps) => {
                 <Td>
                   <Input
                     type="date"
-                    min={GetToday()}
+                    min={minDate}
                     value={selectedDate}
                     onChange={(e) => setSelectedDate(e.target.value)}
                   />

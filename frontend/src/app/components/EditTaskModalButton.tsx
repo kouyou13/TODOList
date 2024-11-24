@@ -20,7 +20,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react"
 import { TodoList } from "../types/types"
-import { GetToday } from "../utils/getToday"
+import { GetNow } from "../utils/GetNow"
 
 type EditTaskModalProps = {
   isOpen: boolean
@@ -39,6 +39,8 @@ const _EditTaskModal = ({
   )
   const [inputName, setInputName] = useState(selectedTodo.name)
   const [selectedDate, setSelectedDate] = useState(selectedTodo.limitDate)
+  const now = GetNow()
+  const minDate = `${now.year}-${now.month}-${now.date}`
 
   const EditHandler = async () => {
     try {
@@ -106,7 +108,7 @@ const _EditTaskModal = ({
                 <Td>
                   <Input
                     type="date"
-                    min={GetToday()}
+                    min={minDate}
                     value={selectedDate}
                     onChange={(e) => setSelectedDate(e.target.value)}
                   />
