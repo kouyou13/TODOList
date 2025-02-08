@@ -10,7 +10,8 @@ const _Home = () => {
   const [keyword, setKeyword] = useState('')
   const [checkedNotAchieved, setCheckedNotAchieved] = useState(false)
   const [checkedInProgress, setCheckedInProgress] = useState(false)
-  const [checkedCompleted, setCheckedInCompleted] = useState(false)
+  const [checkedCompleted, setCheckedCompleted] = useState(false)
+  const [checkedExpired, setCheckedExpired] = useState(false)
 
   const fetchTodoList = async () => {
     try {
@@ -50,8 +51,11 @@ const _Home = () => {
           <Checkbox color="white" p={1} onChange={(e) => setCheckedInProgress(e.target.checked)}>
             In progress
           </Checkbox>
-          <Checkbox color="white" p={1} onChange={(e) => setCheckedInCompleted(e.target.checked)}>
+          <Checkbox color="white" p={1} onChange={(e) => setCheckedCompleted(e.target.checked)}>
             Completed
+          </Checkbox>
+          <Checkbox color="white" p={1} onChange={(e) => setCheckedExpired(e.target.checked)}>
+            Expired
           </Checkbox>
         </Flex>
         <TableTable
@@ -61,6 +65,7 @@ const _Home = () => {
           checkedNotAchieved={checkedNotAchieved}
           checkedInProgress={checkedInProgress}
           checkedCompleted={checkedCompleted}
+          checkedExpired={checkedExpired}
         />
       </Box>
     </>

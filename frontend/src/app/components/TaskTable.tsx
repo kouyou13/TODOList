@@ -13,6 +13,7 @@ type TableTableProps = {
   checkedNotAchieved: boolean
   checkedInProgress: boolean
   checkedCompleted: boolean
+  checkedExpired: boolean
 }
 
 const _TableTable = ({
@@ -22,16 +23,18 @@ const _TableTable = ({
   checkedNotAchieved,
   checkedInProgress,
   checkedCompleted,
+  checkedExpired,
 }: TableTableProps) => {
   const filteredTodoList = (todoList: TodoList[]) => {
-    if (!checkedNotAchieved && !checkedInProgress && !checkedCompleted) {
+    if (!checkedNotAchieved && !checkedInProgress && !checkedCompleted && !checkedExpired) {
       return todoList
     }
     return todoList.filter(
       (todo) =>
         (checkedNotAchieved && todo.achievement === 'Not achieved') ||
         (checkedInProgress && todo.achievement === 'In progress') ||
-        (checkedCompleted && todo.achievement === 'Completed'),
+        (checkedCompleted && todo.achievement === 'Completed') ||
+        (checkedExpired && todo.achievement !== 'Completed' && expiredDecision(todo.limitDate)),
     )
   }
 
