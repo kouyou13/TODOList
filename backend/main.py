@@ -22,7 +22,12 @@ app.add_middleware(
   allow_headers=['*'],
 )
 
+import os
+
 tasksJsonPath = './TodoList.json'
+if not os.path.exists(tasksJsonPath):
+  with open(tasksJsonPath, 'w') as file:
+    json.dump([], file)
 
 class AddItem(BaseModel):
   name: str
